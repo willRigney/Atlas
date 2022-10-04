@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AtLas: Mini Golf</title>
+    <link rel="stylesheet" href="navBar.css">
+    <style>
+        h1 {
+            text-align: center;
+            font-size: 45px;
+            font-weight: bold;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 34px;
+        }
+
+        ol {
+            display: inline-block;
+            text-align: left;
+        }
+
+        li {
+            font-size: 22px;
+            line-height: 1.6;
+        }
+
+        div.instructions {
+            text-align: center;
+        }
+
+        hr {
+            height: 5;
+            background-color: black;
+        }
+
+        .start {
+            font-size: 20px;
+            padding: 24px 75px;
+            font-weight: bold;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            border: none;
+            border-radius: 45px;
+        }
+
+        .start:hover {
+            background-color: #2EE59D;
+            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+            color: #fff;
+            transform: translateY(-7px);
+        }
+
+        .startDiv {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            border: 4px solid black;
+            display: block;
+            padding: 0;
+            margin: auto;
+            height: 600px;
+            width: 600px;
+            background-color: slategray;
+        }
+    </style>
+    <script>
+        function gameStartGolf() {
+            chooseMap();
+        }
+
+        function chooseMap() {
+            var randNum = 1; //(Math.random()*10)+1
+            if (randNum === 1) {
+                map1();
+            }
+            if (randNum === 2) {
+                map2();
+            }
+            if (randNum === 3) {
+                map3();
+            }
+            if (randNum === 4) {
+                map4();
+            }
+            if (randNum === 5) {
+                map5();
+            }
+            if (randNum === 6) {
+                map6();
+            }
+            if (randNum === 7) {
+                map7();
+            }
+            if (randNum === 8) {
+                map8();
+            }
+            if (randNum === 9) {
+                map9();
+            }
+            if (randNum === 10) {
+                map10();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">&#127758;Atlas</div>
+        <ul class="nav-links">
+            <div class="menu">
+                <li><a href="./atlas.html">Home</a></li>
+                <li class="geography">
+                    <a href="./geographyGames.html">Geography Games</a>
+                    <!-- DROPDOWN MENU -->
+                    <ul class="dropdown">
+                        <li><a href="./worldle.html">Worldle</a></li>
+                        <li><a href="/">Dropdown 2</a></li>
+                        <li><a href="/">Dropdown 2</a></li>
+                        <li><a href="/">Dropdown 3</a></li>
+                        <li><a href="/">Dropdown 4</a></li>
+                    </ul>
+                </li>
+                <li class="geography">
+                    <a href="./arcadeGames.html">Arcade Games</a>
+                    <!-- DROPDOWN MENU -->
+                    <ul class="dropdown">
+                        <li><a href="./miniGolf.html">Mini Golf - Singleplayer</a></li>
+                        <li><a href="/">Mini Golf - Multiplayer</a></li>
+                        <li><a href="/">Dropdown 2</a></li>
+                        <li><a href="/">Dropdown 3</a></li>
+                        <li><a href="/">Dropdown 4</a></li>
+                    </ul>
+                </li>
+                <li><a href="./about.html">About</a></li>
+            </div>
+        </ul>
+    </nav>
+    <h1> Mini Golf </h1>
+    <hr>
+    <br>
+    <div class="startDiv">
+        <button class="start" onClick="gameStartGolf()">Start the Game!</button>
+    </div>
+    <br>
+    <canvas id="golfGame" width="400px" height="400px"></canvas>
+    <script>
+        var bounce;
+        var hole;
+        var wall;
+        var ball;
+        var canvas = document.getElementById("golfGame");
+        var ctx = canvas.getContext("2d");
+
+        //Hole in 3 map
+        function map1() {
+            ctx.beginPath();
+            ctx.rect(135, 25, 130, 350)
+            ctx.rect(64, 250, 75, 75);
+            ctx.rect(261, 200, 75, 79);
+            ctx.fillStyle = 'green';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(135, 375, 130, 4);
+            ctx.rect(135, 325, 4, 50);
+            ctx.rect(261, 275, 4, 100);
+            ctx.rect(261, 275, 75, 4);
+            ctx.rect(335, 200, 4, 79);
+            ctx.rect(261, 200, 75, 4);
+            ctx.rect(64, 325, 75, 4);
+            ctx.rect(64, 250, 75, 4);
+            ctx.rect(64, 250, 4, 75);
+            ctx.rect(135, 25, 4, 225);
+            ctx.rect(135, 25, 130, 4);
+            ctx.rect(261, 25, 4, 175)
+            ctx.fillStyle = "white";
+            ctx.fill();
+            bounce = createBounce(300, 240, 25);
+            hole = createHole(240, 55);
+            ball = createBall(160, 360);
+        }
+        function map2() {
+
+        }
+        function map3() {
+
+        }
+        function map4() {
+
+        }
+        function map5() {
+
+        }
+        function map6() {
+
+        }
+        function map7() {
+
+        }
+        function map8() {
+
+        }
+        function map9() {
+
+        }
+        function map10() {
+
+        }
+
+        function createHole(x, y) {
+            ctx.beginPath();
+            hole = ctx.arc(x, y, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = "black";
+            ctx.fill()
+        }
+
+        function createBall(x, y) {
+            ctx.beginPath();
+            hole = ctx.arc(x, y, 3, 0, 2 * Math.PI);
+            ctx.fillStyle = "white";
+            ctx.fill()
+        }
+
+        function createBounce(x, y, radius) {
+            ctx.beginPath();
+            bounce = ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = "orange";
+            ctx.fill()
+        }
+
+        function ballMovement() {
+
+        }
+
+        function holeMechanics() {
+
+        }
+
+        function wallMechanics() {
+
+        }
+
+        function bounceMechanics() {
+
+        }
+    </script>
+    <h2>Instructions</h2>
+    <div class="instructions">
+        <ol>
+            <li> Choose between Multiplayer and Singleplayer and then choose how many holes you want to play</li>
+            <li> Drag your mouse back to determime how fast you want to hit the ball and where you want to aim</li>
+            <li> Make it to the hole in the fewest amount of strokes possible!</li>
+            <li> Orange Circles make your ball bounce further and dark green and light green boxes push your ball the
+                way the arrow is facing</li>
+        </ol>
+    </div>
+</body>
+
+</html>
